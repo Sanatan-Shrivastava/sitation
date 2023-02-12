@@ -132,10 +132,16 @@
 
             <center><button onclick="estimate()" id="estimate-button" type="button" class="btn btn-success">Get
                     Estimate</button>
+                <button onclick="reset()" id="" type="button" class="btn btn-secondary">Reset</button>
+                <script>
+                    function reset() {
+                        location.reload();
+                    }
+                </script>
             </center>
             <br>
 
-            <div class="card container overflow-hidden text-center">
+            <div id="array" class="card container overflow-hidden text-center">
                 <div class="col-12 rounded">
                     <div class="card-header py-3">
                         <strong>

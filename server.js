@@ -33,10 +33,16 @@ function estimate() {
     body: JSON.stringify(data1)
     })
     .then(response => response.json())
-    .then(data => console.log("Response from server:", data))
+    .then(data => console.log("Response from server:", data), arrayShow())
     
     .catch(error => console.error("Error:", error));
 }
+
+function arrayShow() {
+    var dis = document.getElementById('array');
+    dis.style.display = "block";
+}
+
 
 var accordian = document.getElementById('accordionExample')
 var site = document.getElementById('site')
