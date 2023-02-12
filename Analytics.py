@@ -124,13 +124,13 @@ def predictionModel(city, sector, budget):
     sorted_df = filtered_df.sort_values('Revenue', ascending=False)
     sorted_df = sorted_df.drop_duplicates()
     result =[]
-    for data in sorted_df[:5]:
+    for _,data in sorted_df[:5].iterrows():
         elem = {}
         elem['city'] = data['County Name']
         elem['sector'] = sector
         elem['budget'] = budget
         elem['roi'] = data['Revenue']
-        elem['qoz'] = qoz[random.randint(0,2)]
+        elem['qoz'] = qoz[random.randint(0,1)]
         elem['landval'] = dum[city]['landval'][random.randint(0,5)]
         elem['landarea'] = dum[city]['landarea'][random.randint(0,5)]
         result.append(elem) 

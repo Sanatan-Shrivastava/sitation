@@ -14,7 +14,7 @@ def post_data():
     city = data['city']
     sector = data['sector']
     budget = data['budget']
-    df_dict = predictionModel(city, sector, budget).to_dict()
+    df_dict = predictionModel(city, sector, budget)
     json_string = json.dumps(df_dict)
     return json_string
 
@@ -23,7 +23,7 @@ def sendLandData():
     city = request.form['city']
     sector = request.form['sector']
     budget = request.form['budget']
-    df_dict = predictionModel(city, sector, budget).to_dict()
+    df_dict = predictionModel(city, sector, budget)
     return json.dumps(df_dict)
 
 if __name__ == "__main__":

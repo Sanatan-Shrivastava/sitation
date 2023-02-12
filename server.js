@@ -44,6 +44,9 @@ function arrayShow() {
 }
 
 
+
+
+
 var accordian = document.getElementById('accordionExample')
 var site = document.getElementById('site')
 var loc_site = document.getElementById('loc_site')
@@ -54,4 +57,9 @@ var landval = document.getElementById('land_val')
 var qoz = document.getElementById('qoz')
 var sec = document.getElementById('sec')
 var invest = document.getElementById('invest')
+
+
+roi.innerHTML = data['roi']
+site.innerHTML = data['city']
+invest.innerHTML = data['budget']
 
