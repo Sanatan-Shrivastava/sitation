@@ -1,43 +1,28 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>
-        How to get selected value in
-        dropdown list using JavaScript?
-    </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-    <h1 style="color: green">
-        GeeksforGeeks
-    </h1>
-    <b>
-        How to get selected value in dropdown
-        list using JavaScript?
-    </b>
-    <p> Select one from the given options:
-        <select id="select1">
-            <option value="free">Free</option>
-            <option value="basic">Basic</option>
-            <option value="premium">Premium</option>
-        </select>
-    </p>
+    <select id="myDropdown">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+    </select>
 
+    <script>
+        var dropdown = document.getElementById("myDropdown")
+        var selectedOption = dropdown.options[dropdown.selectedIndex].value
 
-    <p> The value of the option selected is:
-        <span class="output"></span>
-    </p>
-
-
-    <button onclick="getOption()"> Check option </button>
-
-    <script type="text/javascript">
-        function getOption() {
-            selectElement = document.querySelector('#select1');
-            output = selectElement.value;
-            document.querySelector('.output').textContent = output;
-        }
+        console.log(selectedOption)
     </script>
+
+
 </body>
 
 </html>

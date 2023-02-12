@@ -21,8 +21,9 @@
     </script>
     <!-- Custom styles for this template -->
     <link href="main.css" rel="stylesheet">
-    <link href="map.scss" rel="stylesheet">
-    <script src="./main.js"></script>
+    <!-- <script src="./main.js"></script> -->
+    <script src="./server.js"></script>
+
 </head>
 
 <body>
@@ -40,10 +41,10 @@
             <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
                 <span>
                     <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                        <i class="bi bi-house-heart-fill fs-4"></i>
-                        <span class="fs-4">&nbsp;&nbsp;Sitation</span>
+                        <i class="bi bi-house-heart-fill fs-4 text-success"></i>
+                        <strong><span class="fs-4 text-success">&nbsp;&nbsp;Sitation for CBRE</span></strong>
                     </a>
-                    <p class="fs-6">Cite a site before Investing!</p>
+                    <p class="fs-6 text-success">Cite a site before Investing!</p>
                 </span>
 
                 <nav class="d-inline-flex mt-0 mt-md-0 ms-md-auto">
@@ -71,20 +72,13 @@
                         </div>
                         <div class="card-body">
                             <div class="locations">
-                                <select id="location" class="btn btn-secondary dropdown-toggle" type="dropdown"
+                                <select id="location" onchange="setLocation()" class="btn btn-secondary" type="dropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false" value="Select">
-                                    <option value="default" selected>Select Location</option>
-                                    <option value="dallas">Dallas, TX</option>
-                                    <option value="los">Los Angeles, CA</option>
-                                    <option value="Phil">Philadelphia, PA</option>
+                                    <option selected disabled>Choose one</option>
+                                    <option value="Dallas">Dallas, TX</option>
+                                    <option value="Los Angeles">Los Angeles, CA</option>
+                                    <option value="Philadelphia">Philadelphia, PA</option>
                                 </select>
-                                <script>
-                                    function showLocations() {
-                                        selectElement = document.querySelector('#location');
-                                        output = selectElement.value;
-                                    }
-                                </script>
-
                             </div>
                         </div>
                     </div>
@@ -96,22 +90,17 @@
                         </div>
                         <div class="card-body">
                             <div class="sector">
-                                <select id="sector" class="btn btn-secondary dropdown-toggle" type="dropdown"
+                                <select id="sector" onchange="setSector()" class="btn btn-secondary" type="dropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false" value="Select">
-                                    <option value="default" selected>Select Sector</option>
-                                    <option value="education">Education</option>
-                                    <option value="healthcare">Healthcare</option>
-                                    <option value="religious">Religious</option>
-                                    <option value="hotels">Hotels</option>
-                                    <option value="entertainment">Entertainment</option>
-                                    <option value="banking">Banking</option>
+                                    <option selected disabled>Choose one</option>
+                                    <option value="Manufacturing">Manufacturing</option>
+                                    <option value="Retail">Retail Trade</option>
+                                    <option value="Gasoline">Gasoline Station</option>
+                                    <option value="Education">Educational Services</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Religious">Religious Services</option>
                                 </select>
-                                <script>
-                                    function showSector() {
-                                        selectElement = document.querySelector('#sector');
-                                        output = selectElement.value;
-                                    }
-                                </script>
                             </div>
                         </div>
                     </div>
@@ -123,22 +112,22 @@
                         </div>
                         <div class="card-body">
                             <div class="budget">
-                                <select id="budget" class="btn btn-secondary dropdown-toggle" type="dropdown"
+                                <select id="budget" onchange="setBudget()" class="btn btn-secondary" type="dropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false" value="Select">
-                                    <option value="default" selected>Budget Range</option>
-                                    <option value="range_one">$0 - $500,000</option>
-                                    <option value="range_two">$5,00,000 - $10,00,000</option>
-                                    <option value="range_three">$10,00,000 - $15,00,000</option>
-                                    <option value="range_four">$15,00,000 - $20,00,000</option>
-                                    <option value="range_five">$20,00,000 - $25,00,000</option>
-                                    <option value="range_six">$25,00,000 - $30,00,000</option>
+                                    <option selected disabled>Choose one</option>
+                                    <option value="500000" min="0" max="500000">$0 - $500,000</option>
+                                    <option value="1500000" min="500000" max="1000000">$5,00,000 - $10,00,000
+                                    </option>
+                                    <option value="2500000" min="1000000" max="1500000">$10,00,000 - $15,00,000
+                                    </option>
+                                    <option value="3500000" min="1500000" max="2000000">$15,00,000 - $20,00,000
+                                    </option>
+                                    <option value="4500000" min="2000000" max="2500000">$20,00,000 - $25,00,000
+                                    </option>
+                                    <option value="5500000" min="2500000" max="3000000">$25,00,000 - $30,00,000
+                                    </option>
                                 </select>
-                                <script>
-                                    function showLocations() {
-                                        selectElement = document.querySelector('#budget');
-                                        output = selectElement.value;
-                                    }
-                                </script>
+
                             </div>
 
                         </div>
@@ -146,9 +135,9 @@
                 </div>
             </div>
 
-            <center><button type="button" class="btn btn-success">Get Estimate</button></center>
-
-
+            <center><button onclick="estimate()" id="estimate-button" type="button" class="btn btn-success">Get
+                    Estimate</button>
+            </center>
             <br>
 
             <div class="card container overflow-hidden text-center">
@@ -165,9 +154,9 @@
                                             data-bs-target="#collapseOne" aria-expanded="true"
                                             aria-controls="collapseOne">
                                             <span>
-                                                <p>Site #1: <span> Mountain View,
+                                                <p id="site">Site #1: <span id="loc_site"> Mountain View,
                                                         CA</span></p>
-                                                <p>$250,000</p>
+                                                <p id="roi">$250,000</p>
                                             </span>
                                         </button>
                                     </h2>
@@ -186,12 +175,12 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>Site #1</td>
-                                                        <td>Mountain View,
+                                                        <td id="loc">Site #1</td>
+                                                        <td id="loc_site">Mountain View,
                                                             CA</td>
-                                                        <td>Otto</td>
-                                                        <td>@mdo</td>
-                                                        <td class="text-primary"><strong>$250,000</strong></td>
+                                                        <td id="sec">Otto</td>
+                                                        <td id="invest">@mdo</td>
+                                                        <td id="roi" class="text-primary"><strong>$250,000</strong></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -200,18 +189,20 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <span class="d-inline-block">
-                                                        <p><i
+                                                        <p id="qoz"><i
                                                                 class="bi
                                                                 bi-info-circle-fill"></i><strong>&nbsp;&nbsp;QOZ:</strong>
                                                             <span>&nbsp;Yes</span></p>
                                                     </span>
-                                                    <p><i class="bi bi-currency-dollar"></i><strong>&nbsp;&nbsp;Land
+                                                    <p id="land_val"><i
+                                                            class="bi bi-currency-dollar"></i><strong>&nbsp;&nbsp;Land
                                                             Value:</strong>
                                                         <span>&nbsp;$350,000</span></p>
-                                                    <p><i class="bi bi-rulers"></i><strong>&nbsp;&nbsp;Land
+                                                    <p id="land_area"><i
+                                                            class="bi bi-rulers"></i><strong>&nbsp;&nbsp;Land
                                                             Area:</strong>&nbsp;150,000
                                                         square units</p>
-                                                    <p><i
+                                                    <p id="address"><i
                                                             class="bi bi-geo-fill"></i><strong>&nbsp;&nbsp;Address:</strong>
                                                         &nbsp;7575
                                                         Frankford Road</p>
@@ -249,7 +240,7 @@
                                                     </div>
                                                 </div>
                                                 <div class=" col">
-                                                    Column
+                                                    <a href="insights.html">Data Insights</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -264,9 +255,6 @@
 
     </main>
     </div>
-
-
-
 </body>
 
 </html>
