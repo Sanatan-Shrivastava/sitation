@@ -15,8 +15,8 @@ def post_data():
     sector = data['sector']
     budget = data['budget']
     df_dict = predictionModel(city, sector, budget).to_dict()
-    response = jsonify({"status": "success"})
-    return response
+    json_string = json.dumps(df_dict)
+    return json_string
 
 def sendLandData():
     print(request.form)
