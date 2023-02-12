@@ -33,6 +33,17 @@ dum = {
 "1025",
 "621",
 "693"
+],
+"site":[
+    "AT&T Stadium|| 1 AT&T Way, Arlington, TX 76011",
+"American Airlines Center|| 2500 Victory Ave, Dallas, TX 75219",
+"Dallas World Aquarium|| 1801 N Griffin St, Dallas, TX 75202",
+"Klyde Warren Park|| 2012 Woodall Rodgers Fwy, Dallas, TX 75201",
+"Dallas Arboretum and Botanical Garden|| 8525 Garland Rd, Dallas, TX 75218",
+"Perot Museum of Nature and Science|| 2201 N Field St, Dallas, TX 75201",
+"Bishop Arts District|| Bishop Ave, Dallas, TX 75208",
+"Museum at Dealey Plaza|| 411 Elm St, Dallas, TX 75202",
+"Reunion || 300 Reunion Blvd E, Dallas, TX 75207"
 ]
     },
     "Los Angeles":{
@@ -57,7 +68,19 @@ dum = {
 "25844",
 "6267",
 "63937",
-"64757"]
+"64757"],
+ "site":[
+    "Universal Studios Hollywood|| 100 Universal City Plaza, Universal City, CA 91608",
+"Dolby Theatre|| 6801 Hollywood Blvd, Hollywood, CA 90028",
+"Getty Center|| 1200 Getty Center Dr, Los Angeles, CA 90049",
+"Sunset Strip|| 9039 Sunset Blvd, West Hollywood, CA 90069",
+"Walk of Fame|| Hollywood Blvd, Los Angeles, CA 90028",
+"The Grove|| 189 The Grove Dr, Los Angeles, CA 90036",
+"LACMA (Los Angeles County Museum of Art)|| 5905 Wilshire Blvd, Los Angeles, CA 90036",
+"The Broad|| 221 S Grand Ave, Los Angeles, CA 90012",
+"Venice Beach Boardwalk|| 1800 Ocean Front Walk, Venice, CA 90291",
+"The Hollywood Sign|| Griffith Park, Los Angeles, CA 90027"
+ ]
         },
     "Philadelphia":{
         "landval":[
@@ -86,6 +109,14 @@ dum = {
 "1025",
 "621",
 "693"
+],
+"site":[
+    "The Magic Garden|| 1020 South St, Philadelphia, PA 19147",
+"Edgar Allan Poe National Historic Site|| 532 N 7th St, Philadelphia, PA 19123",
+"Reading Terminal Market|| 1136 Arch St, Philadelphia, PA 19107",
+"Bartram Garden|| 5400 Lindbergh Blvd, Philadelphia, PA 19143",
+"Schuylkill River Trail|| Schuylkill River Trail, Philadelphia, PA 19130",
+"Mount Moriah Cemetery|| 6201 Kingsessing Ave, Philadelphia, PA 19142"
 ]
     }
 }
@@ -124,15 +155,16 @@ def predictionModel(city, sector, budget):
     sorted_df = filtered_df.sort_values('Revenue', ascending=False)
     sorted_df = sorted_df.drop_duplicates()
     result =[]
-    for _,data in sorted_df[:5].iterrows():
+    for data in sorted_df[:5]:
         elem = {}
         elem['city'] = data['County Name']
         elem['sector'] = sector
         elem['budget'] = budget
         elem['roi'] = data['Revenue']
-        elem['qoz'] = qoz[random.randint(0,1)]
+        elem['qoz'] = qoz[random.randint(0,2)]
         elem['landval'] = dum[city]['landval'][random.randint(0,5)]
         elem['landarea'] = dum[city]['landarea'][random.randint(0,5)]
+        elem['addr'] = dum[city]['addr'][random.randint(0,5)]
         result.append(elem) 
     return result
 
